@@ -1,28 +1,24 @@
 // test cases are described in fixtures.js
-describe("parseJSON", function(){
+describe('parseJSON', function(){
 
-  it("should match the result of calling JSON.parse", function(){
-    stringifiableValues.forEach(function(obj){
-      var result = parseJSON(JSON.stringify(obj));
-      var equality = _.isEqual(result, obj); // why can't we use `===` here?
-      expect(equality).toBeTruthy();
+  it('should match the result of calling JSON.parse', function(){
+    parseableStrings.forEach(function(test){
+      var result = parseJSON(test);
+      var expected = JSON.parse(test);
+      var equality = _.isEqual(result, expected); // why can't we use `===` here?
+      expect(equality).to.equal(true);
     });
-
-    // if you really want to stress test your code, try this...
-    // extraCreditStrings.forEach(function(string){
-    //   var expected = JSON.parse(string);
-    //   var result = parseJSON(string);
-    //   var equality = _.isEqual(result, expected);
-    //   expect(equality).toBeTruthy();
-    // });
   });
 
-  it("should error out sometimes", function(){
-    nonStringifiableValues.forEach(function(test){
-      // expect(parseJSON(test)).toBe(undefined); // you can use this test if you'd prefer
-      expect(function(){
+  it('should throw an error for invalid stringified JSON', function(){
+    unparseableStrings.forEach(function(test){
+      var fn = function(){
         parseJSON(test);
-      }).toThrow();
+      }
+      // expect(parseJSON(test)).to.equal(undefined);
+      // if you'd prefer, you can write your version of parseJSON 
+      // so that it passes this test instead of the one on line 21.      
+      expect(fn).to.throw(SyntaxError);
     });
   });
 

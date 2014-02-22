@@ -1,4 +1,4 @@
-var stringifiableValues = [
+var stringifiableObjects = [
   9,
   null,
   true,
@@ -25,16 +25,33 @@ var stringifiableValues = [
 // used for stringifyJSON spec
 // hint: JSON does not allow you to stringify functions or
 // undefined values, so you should skip those key/value pairs.
-var nonStringifiableValues = [
+var unstringifiableValues = [
   {
-    'a-function': function(){},
-    'an-integer': 1,
-    'the-value-undefined': undefined,
-    'a-string': 'sup?'
+    'functions': function(){},
+    'undefined': undefined
   }
 ];
 
-var extraCreditStrings = [
+var parseableStrings = [
+  // basic stuff
+  '[]',
+  '{"foo": ""}',
+  '{}',
+  '{"foo": "bar"}',
+  '["one", "two"]',
+  '{"a": "b", "c": "d"}',
+  '[null,false,true]',
+  '{"foo": true, "bar": false, "baz": null}',
+  '[1, 0, -1, -0.3, 0.3, 1343.32, 3345, 0.00011999999999999999]',
+  '{"boolean, true": true, "boolean, false": false, "null": null }',
+
+  // basic nesting
+  '{"a":{"b":"c"}}',
+  '{"a":["b", "c"]}',
+  '[{"a":"b"}, {"c":"d"}]',
+  '{"a":[],"c": {}, "b": true}',
+  '[[[["foo"]]]]',
+
   // escaping
   '["\\\\\\"\\"a\\""]',
   '["and you can\'t escape thi\s"]',
@@ -100,8 +117,8 @@ var extraCreditStrings = [
     '      }\r\n'
 ];
 
-// used for stringifyJSON and parseJSON specs
-var arrayWithInvalidStrings = [
-  '["foo", "bar"',
-  '["foo", "bar\\"]'
+// JSON does not allow you to parse these strings
+var unparseableStrings = [
+    '["foo", "bar"',
+    '["foo", "bar\\"]'
 ];
