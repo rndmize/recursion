@@ -40,7 +40,7 @@ var stringifyJSON = function (obj) {
       i++;
 
       str += '"' + item.toString() + '"' + ':';
-      if ((typeof obj[item] === "object") && (obj[item] !== null)) {
+      if (typeof obj[item] === "object") {
         str += stringifyJSON(obj[item]);
       }
       else {
