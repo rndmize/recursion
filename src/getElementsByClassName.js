@@ -2,6 +2,7 @@
 // var getElementsByClassName = function (className) {
 //   return document.getElementsByClassName(className);
 // };
+
 // But in stead we're going to implement it from scratch:
 var getElementsByClassName = function (className) {
   var body = document.body;
@@ -13,14 +14,14 @@ var traverseTree = function (className, currentNode) {
 
   for (var i = 0; i < currentNode.classList.length; i++) {
     if (currentNode.classList[i] === className)
-      targets[i] = currentNode.nodeName;
+      targets.push(currentNode);
   }
 
-  if (currentNode.firstChild.nodeType === 1)
-    targets = targets.concat(traverseTree(className, currentNode.firstChild));
+  if (currentNode.firstElementChild !== null)
+    targets = targets.concat(traverseTree(className, currentNode.firstElementChild));
 
-  if (currentNode.nextSibling.nodeType === 1)
-    targets = targets.concat(traverseTree(className, currentNode.nextSibling));
+  if (currentNode.nextElementSibling !== null)
+    targets = targets.concat(traverseTree(className, currentNode.nextElementSibling));
 
   return targets;
 }

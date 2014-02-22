@@ -34,7 +34,7 @@ var stringifyJSON = function (obj) {
       if ((typeof obj[item] === "function") || (typeof obj[item] === "undefined")) { // remove functions
         continue;
       }
-      console.log(typeof obj[item]);
+      // console.log(typeof obj[item]);
       if (i !== 0) str += ",";
       i++;
 
